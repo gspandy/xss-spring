@@ -11,6 +11,7 @@ public class SignupForm {
 		@Size(min=1, max=255, message="{sizeErrorMessage}")
 		@Pattern(regexp="[A-Za-z0-9._%-+]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message="{emailErrorMessage}")
 		private String email;
+		
 		@NotNull
 		@Size(min=1, max=255, message="{sizeErrorMessage}") 
 		private String name;

@@ -86,7 +86,20 @@
 			<version>3.2.1</version>
 		</dependency>
 		
+		<!-- OWASP Java Encoder Project -->
+		<dependency>
+		   <groupId>org.owasp.encoder</groupId>
+		   <artifactId>encoder</artifactId>
+		   <version>1.2</version>
+		</dependency>
 		
+		<dependency>
+		   <groupId>org.owasp.encoder</groupId>
+		   <artifactId>encoder-jsp</artifactId>
+		   <version>1.2</version>
+		</dependency>
+		
+		<!-- Spring Boot Actuator -->
 		<dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-actuator</artifactId>

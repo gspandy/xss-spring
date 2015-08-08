@@ -45,6 +45,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+        	.csrf().disable()
             .authorizeRequests()
                 .antMatchers("/",
                 		"/home",
@@ -53,6 +54,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
                 		"/forgot-password",
                 		"/reset-password/*",
                 		"/public/**",
+                		"/search/**",
                 		"/users/**").permitAll()
                 .anyRequest().authenticated(); // all other require authentication
         http

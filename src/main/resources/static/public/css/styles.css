@@ -1,3 +1,84 @@
 form .error{
 	color: #F44442;
 }
+body{
+	background-color: #f5f5f5;
+}
+#home-jumbotron{
+	background-color: #93b1c6;
+	color: #f5f5f5;
+	border-bottom: 2px solid #ff7148;
+	border-top: 2px solid #ff7148;
+}
+.page-header-custom {
+    padding-bottom: 0px;
+    margin: 40px 0 20px;
+    border-bottom: 4px solid #93b1c6;
+}
+.page-header-custom h1{
+	color: #ff7148;
+}
+.page-header-custom h1 small{
+	color: #c7d0d5;
+}
+.panel-custom{
+	border-color: #ff7148;
+}
+.panel-custom > .panel-heading {
+    color: #f5f5f5;
+    background-color: #ff7148;
+    border-color: #ff7148;
+}
+.panel-custom > .panel-body{
+	background-color: #c7d0d5;
+	border-color: #ff7148;
+	border-radius: 2px;
+}
+.btn-custom{
+	background-color: #ff7148;
+	color: #f5f5f5;
+}
+.form-custom div label{
+	color: #f5f5f5;
+}
+#comment-form{
+	position: fixed;
+}
+#custom-bootstrap-menu.navbar-default .navbar-brand {
+    color: rgba(245, 245, 245, 1);
+}
+#custom-bootstrap-menu.navbar-default {
+    font-size: 14px;
+    background-color: rgba(147, 177, 198, 1);
+    border-width: 1px;
+    border-radius: 6px;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
+    color: rgba(245, 245, 245, 1);
+    background-color: rgba(248, 248, 248, 0);
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(255, 113, 72, 1);
+    background-color: rgba(199, 208, 213, 1);
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(255, 113, 72, 1);
+    background-color: rgba(199, 208, 213, 1);
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle {
+    border-color: #c7d0d5;
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
+#custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
+    background-color: #c7d0d5;
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
+    background-color: #c7d0d5;
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
+#custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #93b1c6;
+}

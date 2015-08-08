@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ryanperrizo.spring.sample.dto.ApplicantForm;
 import com.ryanperrizo.spring.sample.dto.CommentForm;
+import com.ryanperrizo.spring.sample.dto.SearchForm;
 import com.ryanperrizo.spring.sample.dto.SignupForm;
 import com.ryanperrizo.spring.sample.mail.MailSender;
 import com.ryanperrizo.spring.sample.mail.MockMailSender;
@@ -59,6 +61,7 @@ public class RootController {
 //		mailSender.send("perrizotest@gmail.com", "Email from Spring", "This is the test message" + "${app.name}");
 //		return "home";
 //	}
+	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String singup(Model model){
 		model.addAttribute("signupForm", new SignupForm());//default key would be the same
@@ -87,10 +90,32 @@ public class RootController {
 	}
 	
 	@RequestMapping(value = "/comments", method = RequestMethod.POST)
-	public String comments(@ModelAttribute("commentForm") @Valid CommentForm commentForm){
+	public String comments(@ModelAttribute("commentForm") @Valid CommentForm commentForm,
+			Model model){
 		
 		userService.addComment(commentForm);
+		model.addAttribute("comments", userService.viewComments());
+		return "comment";
+	}
+	
+	@RequestMapping(value = "/apply", method = RequestMethod.GET)
+	public String apply(Model model){
+		model.addAttribute("applicantForm", new ApplicantForm());
 		
-		return "redirect:/comments";
+		return "apply";
+	}
+	
+	@RequestMapping(value = "/apply", method = RequestMethod.POST)
+	public String apply(@ModelAttribute("applicantForm") @Valid ApplicantForm applicantForm,
+			BindingResult result,
+			RedirectAttributes redirectAttributes){
+		
+		if(result.hasErrors())
+			return "apply";
+		
+		MyUtil.flash(redirectAttributes, "success", "applySuccess");
+		userService.apply(applicantForm);
+		
+		return "redirect:/";
 	}
 }

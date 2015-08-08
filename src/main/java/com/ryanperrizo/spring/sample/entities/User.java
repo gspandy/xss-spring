@@ -105,5 +105,6 @@ public class User {
 			return false;
 		return loggedIn.isAdmin() || loggedIn.getId() == id;
 	}
+	
 
 }

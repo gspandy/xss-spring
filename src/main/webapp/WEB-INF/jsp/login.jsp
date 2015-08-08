@@ -1,5 +1,6 @@
 <%@include file="includes/header.jsp" %>
-	<div class="panel panel-primary">
+	<div class="col-md-offset-4 col-md-4">
+	<div class="panel panel-custom">
 
 	<div class="panel-heading">
 		<h3 class="panel-title">Please sign in</h3>
@@ -19,12 +20,11 @@
 		    </div>
 	    </c:if>
 	
-		<form:form role="form" method="post">
+		<form:form class="form-custom" role="form" method="post">
 		
 			<div class="form-group">
 				<label for="username">Email address</label>
 				<input id="username" name="username" type="email" class="form-control" placeholder="Enter email" />
-				<p class="help-block">Enter your email address.</p>
 			</div>
 			
 			<div class="form-group">
@@ -41,9 +41,10 @@
 				</div>
 			</div>
 			
-			<button type="submit" class="btn btn-primary">Sign In</button>
+			<button type="submit" class="btn btn-custom">Sign In</button>
 			
 		</form:form>
+	</div>
 	</div>
 </div>
 

@@ -21,13 +21,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import com.ryanperrizo.spring.sample.dto.ApplicantForm;
 import com.ryanperrizo.spring.sample.dto.CommentForm;
 import com.ryanperrizo.spring.sample.dto.SignupForm;
 import com.ryanperrizo.spring.sample.dto.UserDetailsImpl;
+import com.ryanperrizo.spring.sample.entities.Applicant;
 import com.ryanperrizo.spring.sample.entities.Comment;
 import com.ryanperrizo.spring.sample.entities.User;
 import com.ryanperrizo.spring.sample.entities.User.Role;
 import com.ryanperrizo.spring.sample.mail.MailSender;
+import com.ryanperrizo.spring.sample.repositories.ApplicantRepository;
 import com.ryanperrizo.spring.sample.repositories.CommentRepository;
 import com.ryanperrizo.spring.sample.repositories.UserRepository;
 import com.ryanperrizo.spring.sample.util.MyUtil;
@@ -42,14 +45,16 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 	private PasswordEncoder passwordEncoder;
 	private MailSender mailSender;
 	private CommentRepository commentRepository;
+	private ApplicantRepository applicantRepository;
 	
 	@Autowired
 	public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder,
-			MailSender mailSender, CommentRepository commentRepository){
+			MailSender mailSender, CommentRepository commentRepository, ApplicantRepository applicantRepository){
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.mailSender = mailSender;
 		this.commentRepository = commentRepository;
+		this.applicantRepository = applicantRepository;
 	}
 	
 	@Override
@@ -149,6 +154,28 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 	public List<Comment> viewComments() {
 		// TODO Auto-generated method stub
 		return commentRepository.findAll();
+		
+	}
+
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
+	public void apply(ApplicantForm applicantForm) {
+		// TODO Auto-generated method stub
+		User loggedIn = MyUtil.getSessionUser();
+		Applicant applicant = new Applicant();
+		applicant.setAddress(applicantForm.getAddress());
+		applicant.setBirthDate(applicantForm.getBirthDate());
+		applicant.setFirstName(applicantForm.getFirstName());
+		applicant.setLastName(applicantForm.getLastName());
+		applicant.setCity(applicantForm.getCity());
+		applicant.setZip(applicantForm.getZip());
+		applicant.setSsn(applicantForm.getSsn());
+		applicant.setGender(applicantForm.getGender());
+		applicant.setEmail(loggedIn.getEmail());
+		applicant.setDarkestSecret(applicantForm.getDarkestSecret());
+		applicant.setState(applicantForm.getState());
+		logger.info(applicant.toString());
+		applicantRepository.save(applicant);
 		
 	}
 	
