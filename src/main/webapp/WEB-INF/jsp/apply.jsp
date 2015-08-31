@@ -2,15 +2,29 @@
 	
 	<div class="page-header-custom">
 		<h1>
-		<script>
-			if(window.location.hash){
-				var state = window.location.hash.replace("#",'');
-				if(state === "Washington" || state === "Oregon" || state === "California")
-					document.write("Welcome to the " + encodeURI(state) + " application portal");
-			}else{
-				document.write("Welcome to the application portal!");
-			}
-		</script>
+		<c:choose>
+			<c:when test="${secure == 'Secure'}">
+				<script>
+					if(window.location.hash){
+						var state = window.location.hash.replace("#",'');
+						if(state === "Washington" || state === "Oregon" || state === "California")
+							document.write("Welcome to the " + encodeURI(state) + " application portal");
+					}else{
+						document.write("Welcome to the application portal!");
+					}
+				</script>
+			</c:when>
+			<c:otherwise>
+				<script>
+					if(window.location.hash){
+						var state = window.location.hash.replace("#", '');
+						document.write("Welcome to the " + state + " application portal!");
+					}else{
+						document.write("Welcome to the application portal!");
+					}
+				</script>
+			</c:otherwise>
+		</c:choose>
 		<small> Where PII goes to die</small></h1>
 	</div>
 	
@@ -23,7 +37,7 @@
 	
 	<div class="panel-body">
 	
-		<form:form class="form-custom" modelAttribute="applicantForm" role="form">
+		<form:form class="form-custom" modelAttribute="applicantForm" action="?${secure}" role="form">
 			<form:errors />
 			<div class="col-md-6">
 				<div class="form-group">

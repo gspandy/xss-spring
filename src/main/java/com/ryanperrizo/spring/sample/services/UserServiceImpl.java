@@ -23,6 +23,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 
 import com.ryanperrizo.spring.sample.dto.ApplicantForm;
 import com.ryanperrizo.spring.sample.dto.CommentForm;
+import com.ryanperrizo.spring.sample.dto.ForgotPasswordForm;
 import com.ryanperrizo.spring.sample.dto.SignupForm;
 import com.ryanperrizo.spring.sample.dto.UserDetailsImpl;
 import com.ryanperrizo.spring.sample.entities.Applicant;
@@ -177,6 +178,35 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 		logger.info(applicant.toString());
 		applicantRepository.save(applicant);
 		
+	}
+
+	@Override
+	public void forgotPassword(ForgotPasswordForm forgotPasswordForm) {
+		
+		final User user = userRepository.findByEmail(forgotPasswordForm.getEmail());
+		final String forgotPasswordCode = RandomStringUtils.randomAlphanumeric(User.RANDOM_CODE_LENGTH);
+		
+		user.setForgotPasswordCode(forgotPasswordCode);
+		final User savedUser = userRepository.save(user);
+		
+		TransactionSynchronizationManager.registerSynchronization(
+				new TransactionSynchronizationAdapter(){
+					@Override
+					public void afterCommit(){
+						try{
+							mailForgotPasswordLink(savedUser);
+						} catch(MessagingException e){
+							logger.error(ExceptionUtils.getStackTrace(e));
+						}
+					}
+				});
+	}
+	
+	private void mailForgotPasswordLink(User user) throws MessagingException{
+		String forgotPasswordLink = 
+				MyUtil.hostUrl() + "/reset-password/" + user.getForgotPasswordCode();
+		mailSender.send(user.getEmail(),  MyUtil.getMessage("forgotPasswordSubject"), 
+				MyUtil.getMessage("forgotPasswordEmail", forgotPasswordLink));
 	}
 	
 	

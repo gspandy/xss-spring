@@ -21,8 +21,9 @@ public class SpringStartApplication {
 
 	private static final Logger logger = LoggerFactory.getLogger(SpringStartApplication.class);
 	
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
 //        SpringApplication.run(SpringStartApplication.class, args);
+    	try{
         ApplicationContext ctx = SpringApplication.run(SpringStartApplication.class, args);
         logger.info("Beans in application context: ");
         
@@ -31,5 +32,9 @@ public class SpringStartApplication {
         
         for (String beanName: beanNames)
         	logger.info(beanName);
+        
+    	}catch(Exception e){
+        	logger.info(e.toString());
+        }
     }
 }

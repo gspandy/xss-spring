@@ -1,20 +1,8 @@
 package com.ryanperrizo.spring.sample.dto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+public interface CommentForm {
 
-public class CommentForm {
-	
-	@NotNull
-	@Size(min=1, max=255, message="{sizeErrorMessage}")
-	private String comment;
+	public abstract String getComment();
 
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	
+	public abstract void setComment(String comment);
 }

@@ -36,6 +36,10 @@
                 </li>
                 <li><a href="/apply">Application</a>
                 </li>
+                <c:if test="${secure != null}">
+	                <li><form id="toggle-button" method="get"><input class="btn ${secure}" name="toggle" value="${secure}" type="submit"/></form>
+	                </li>
+	            </c:if>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 				      <sec:authorize access="isAnonymous()"><!-- Means unauthenticated user -->

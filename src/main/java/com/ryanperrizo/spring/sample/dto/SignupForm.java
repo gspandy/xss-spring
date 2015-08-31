@@ -4,12 +4,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.ryanperrizo.spring.sample.entities.User;
+
 
 public class SignupForm {
 		
 		@NotNull
 		@Size(min=1, max=255, message="{sizeErrorMessage}")
-		@Pattern(regexp="[A-Za-z0-9._%-+]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message="{emailErrorMessage}")
+		@Pattern(regexp=User.EMAIL_PATTERN, message="{emailErrorMessage}")
 		private String email;
 		
 		@NotNull

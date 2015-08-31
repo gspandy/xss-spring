@@ -42,6 +42,7 @@
 			</div>
 			
 			<button type="submit" class="btn btn-custom">Sign In</button>
+			<a class="btn btn-custom" href="/forgot-password">Forgot Password</a>
 			
 		</form:form>
 	</div>
